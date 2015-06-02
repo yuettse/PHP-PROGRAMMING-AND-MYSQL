@@ -1,15 +1,14 @@
 <?php
 //Create a program that displays a multiplication table that looks like the table below.
-
 function multitable( $rows ) {
 	$firstrows = 0;
 	echo '<table>';
 	for( $i = 0; $i <= $rows; $i++ ) {
 		if ( $firstrows == 0 ) {
 			echo '<tr>
-					<td></td>';
-			for ( $a = 0; $a < $rows; $a++ ) {
-				echo '<td>' . $a + 1 . '</td>';
+					<td> </td>';
+			for ( $z = 0; $z < $rows; $z++ ) {
+				echo '<td>' . ($z + 1) . '</td>';
 			}
 			echo '</tr>';
 		} else {
@@ -24,8 +23,5 @@ function multitable( $rows ) {
 	}
 	echo '</table>';	
 }
-
-
-multitable(9);
-
+multitable(100);
 ?>
