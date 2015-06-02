@@ -1,32 +1,29 @@
 <?php
-/*Assignment: Get Min and Max
-Create a function get_max_and_min() that takes an array of numbers and, then,
- returns both the minimum and the maximum number from the given array
- as an associative array. Do not use the PHP function max() or min()
- to get this to work. See if you can do this using arrays and for loops.*/
-function get_max_and_min($ary1) {
-	$max = 0;
-	$min = 0;
-	if (count($ary1) > 1) {
-		$max = $ary1[0];
-		$min = $ary1[0];
-		for ( $i = 0; $i < count($ary1) - 1; $i++) {
-			if ( $max < $ary1[$i + 1]) {
-				$max = $ary1[$i + 1];
-			}
-			if ( $min > $ary1[$i + 1]) {
-				$min = $ary1[$i + 1];
-			}
+/*Create a function called draw_stars() that takes an array of numbers and echo out  *.
+Modify the function above. Allow an array, that contains integers and strings, to be passed to the draw_stars() function. When a string is passed, instead of  displaying *, 
+display the first letter of the string according to the example below.*/
 
+
+function draw_stars($ary1) {
+	for( $i = 0; $i < count($ary1); $i++ ) {
+		if ( is_numeric($ary1[$i]) ) {
+			for ( $a = 0; $a < $ary1[$i]; $a++ ) {
+				echo "*";
+			}
+			echo '<br>';
+		} else {
+			for ( $a = 0; $a < strlen($ary1[$i]); $a++) {
+				echo strtolower($ary1[$i][0]);
+			}
+			echo '<br>';
 		}
-		echo "Max array = " . $max . "<br>Min array = " . $min;
-	} else {
-		echo 'Sorry, your array size is less than 1';
+		
 	}
-	
-	
 }
-$sample = array( 135, 2.4, 2.67, 1.23, 332, 2, 1.02);
-get_max_and_min($sample);
-$temp = $sample[1];
+
+
+
+$x = array(4, "Tom", 1, "Michael", 5, 7, "Jimmy Smith");
+draw_stars($x); 
+
 ?>
