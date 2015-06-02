@@ -8,12 +8,12 @@ function multitable( $rows ) {
 			echo '<tr>
 					<td> </td>';
 			for ( $z = 0; $z < $rows; $z++ ) {
-				echo '<td>' . ($z + 1) . '</td>';
+				echo '<td><strong>' . ($z + 1) . '</strong></td>';
 			}
 			echo '</tr>';
 		} else {
 			echo '<tr>';
-			echo '<td>' . $firstrows . '</td>';
+			echo '<td><strong>' . $firstrows . '</strong></td>';
 			for ( $a = 0; $a < $rows; $a++ ) {
 				echo '<td>' . $firstrows * ($a + 1) . '</td>';
 			}
@@ -23,5 +23,5 @@ function multitable( $rows ) {
 	}
 	echo '</table>';	
 }
-multitable(100);
+multitable(150);
 ?>
