@@ -1,6 +1,7 @@
 <?php session_start();
 	if( !isset($_SESSION['guessnumber'])) {
 		$_SESSION['guessnumber'] = rand(1, 100);
+		$_SESSION['times'] = 0;
 	}
 ?>
 <html>
@@ -14,23 +15,31 @@
 	<p>Take a guess!</p>
 	<? 
 		if ( $_SESSION['answer'] == 'high' ) {
-			echo '<div style="width: 100px; height: 100px; background-color: red; color: white;">TOO HIGH!</div>';
+			echo '<div style="width: 200px; height: 200px; background-color: red; color: white;">TOO HIGH!</div>';
+			unset($_SESSION['answer']);
 		} else if ( $_SESSION['answer'] == 'low' ) {
-			echo '<div style="width: 100px; height: 100px; background-color: red; color: white;">TOO LOW!</div>';
+			echo '<div style="width: 200px; text-align: center; height: 200px; background-color: red; color: white;">TOO LOW!</div>';
+			unset($_SESSION['answer']);
 		} else if ( $_SESSION['answer'] == 'right' ) {
-			echo '<div style="width: 100px; height: 100px; background-color: red; color: white;">
-			YOU WIN! THE CORRECT NUMBER IS ' . $_SESSION['guessnumber'] . '!</div>';
-			echo '<button type="submit" formaction="number.php" name="again" value="yes" formmethod="get">Play Again!</button>';
+			echo '<div style="width: 200px; height: 200px; background-color: red; color: white;">
+			YOU WIN! THE CORRECT NUMBER IS ' . $_SESSION['guessnumber'] . 
+			'!<br><form action="number.php" method="get">
+					<input type="hidden" name="again" value="yes">
+					<input type="submit" value="Play Again!"></form></div>';
+			
 		}
-		if ( $_SESSION['answer'] == 'high' || $_SESSION['answer'] == 'low' || $_SESSION['answer'] == NULL ) {
+		if ( $_SESSION['answer'] != 'right') {
 		
 			echo '<form action="number.php" method="get">
 					<input type="text" name="number">
-					<input type="submit">';
+					<input type="submit">
+					</form>';
+		} else {
+				echo '<p>You tried ' . $_SESSION['times'] . 'to win</p>';		
 		}
+		
 	?>
-
-	</form>
+	
+	
 </body>
 </html>
-
