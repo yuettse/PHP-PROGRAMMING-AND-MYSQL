@@ -24,29 +24,13 @@ if( $_GET['building'] == 'farm' ) {
 	}
 }
 
-if ( $_SESSION['gold'] < 0) {
+if ( $_SESSION['temp'] < 0) {
 	array_push($_SESSION['blog'], "<div>You entered a casino and lost " . $_SESSION['temp'] * -1 . "gold" . date("Y-m-d") . ' ' . date("h:i:sa"). '</div>';
 } else {
 	array_push($_SESSION['blog'], "<div>You entered a" . $_SESSION['building'] . "and earned " . $_SESSION['temp'] . "gold" . date("Y-m-d") . ' ' . date("h:i:sa"). '</div>';
 }
 
-
-
-
-
-
-
-		<?
-		if ($_SESSION['temp'] < 0) {
-			
-		} else {
-			
-		}
-		?>
 header('LocationLocation: ninjagoldgame.php');
-
-
-
 
 
 ?>
