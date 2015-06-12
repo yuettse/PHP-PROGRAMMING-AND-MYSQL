@@ -27,18 +27,20 @@ require_once('new-connection.php');
 		<input type="submit" value="Post a message" >
 	</form>
 	<?
-		$count = 1;
+		
 		$query = fetch("SELECT * FROM messages");
+		$count = count($query);
+		$query = array_reverse($query);
 		foreach( $query as $temp ) {
 			
 			$msgid = $temp['id'];
-			$temp1 = fetch("SELECT comment, users_id FROM comments WHERE messages_id = '$msgid'");
+			$temp1 = fetch("SELECT comment, users_id, created_at FROM comments WHERE messages_id = '$msgid'");
 			$userid = $temp['users_id'];
 			$name = fetch("SELECT name FROM users WHERE id = '$userid'");
 			
 			echo "<strong>". $name['name'] . " Message " . $count . "</strong><br>";
 			
-			$count++;
+			$count--;
 			
 			echo $temp['message'] . "<br> Date: " . $temp['created_at'];
 			
@@ -49,12 +51,13 @@ require_once('new-connection.php');
 					$commentusersid = $commentusersid['users_id'];
 					$commentname = fetch("SELECT name FROM users WHERE id ='$commentusersid'");
 				
-					echo "<li>" . $commentname['name'] . "'s comment <br>" . $temp1["comment"]  . "</li>";
+					echo "<li>" . "<strong>" . $commentname['name'] . "'s comment: </strong>" . $temp1["comment"]  . "<br><strong>Date: " . $temp1['created_at'] . "</strong><br><br>" . "</li>";
 				} else {	
+					
 					foreach ($temp1 as $temp2) {
 						$commentname = $temp2['users_id'];
 						$commentname = fetch("SELECT name FROM users WHERE id = '$commentname'");
-						echo "<li>" . $commentname['name'] . "'s comment <br>" . $temp2["comment"]  . "</li>";
+						echo "<li>" . "<strong>" . $commentname['name'] . "'s comment: </strong>" . $temp2["comment"] . "<br><strong>Date: " . $temp2['created_at'] . "</strong><br><br>"  . "</li>";
 					}
 				}
 				echo "</ol>";
